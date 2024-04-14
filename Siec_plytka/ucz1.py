@@ -1,4 +1,4 @@
-from Siec_plytka.dzialaj1 import calculate1
+from Siec_plytka.dzialaj1 import calculate2, calculate1
 import numpy as np
 
 def ucz1(Wprzed, inputs, T, n):
@@ -11,29 +11,34 @@ def ucz1(Wprzed, inputs, T, n):
     :param n: number of iterations
     :return: Wafter: matrix of wages W after training
     """
-
-    w_init = Wprzed
+    i=0
+    Wafter = np.copy(Wprzed)
     beta = 5
+    wspUcz = 0.1
     #liczba przykladow
-    m = inputs.shape[1]
-    print(f"liczba cech wejściowych ucz1: {m} ")
+    m = inputs.shape[0]
+    ###print(f"liczba cech wejściowych ucz1: {m} ")
 
     for i in range(n):
 
         random_sample = np.random.randint(0,m)
 
-        result, derivative = calculate1(w_init, inputs[random_sample])
-        cost = T[random_sample] - result
+        result, derivative = calculate1(Wafter[random_sample], inputs[random_sample])
+        #result, derivative = calculate2(Wprzed, inputs)
+        #####cost = T - result####
 
 
         #derivative of cost funciton with respect to W
-        #dj_dW = 1/m * np.sum(derivative)        #_________
-        dj_dW = np.outer(cost, derivative)
+        dj_dW = wspUcz * derivative
+        #dj_dW = np.outer(cost, derivative)
+
 
         #change wages
-        w_init = w_init - 0.01 * dj_dW
+        Wafter[random_sample] = Wafter[random_sample] + dj_dW
 
-    Wafter = w_init
+
+        ###print(f"Wafter: {Wafter}")
+        ###rint(f"dj_dW: {dj_dW}")
 
     return Wafter
 

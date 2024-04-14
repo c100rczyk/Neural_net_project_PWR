@@ -9,11 +9,11 @@ def init1(S,K):
     :param K: number of neurons in layer
     :return: W - matrix of wages in network
     """
-    w = np.zeros((K, S))
+    i=j=0
+    w = np.zeros((K,S))
     for i in range(K):
         for j in range(S):
             w[i, j] = np.random.uniform(-0.1, 0.1)
-
     return w
 
 

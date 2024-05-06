@@ -1,3 +1,5 @@
+# Tworzy sieć inicjuje wagi
+
 import numpy as np
 
 def init1(S,K):
@@ -8,6 +10,9 @@ def init1(S,K):
     :param S: number of inputs to network
     :param K: number of neurons in layer
     :return: W - matrix of wages in network
+
+
+
     """
     i=j=0
     w = np.zeros((K,S))
